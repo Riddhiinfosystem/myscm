@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_company_code"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    tools:context="com.riddhi.myscm.CompanyCode"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:background="#ffffff">
+    <ImageView
+        android:layout_width="140dp"
+        android:layout_height="100dp"
+        android:id="@+id/myScmImage"
+        android:src="@drawable/login_logo"
+        android:layout_weight="0.30"
+        android:layout_gravity="center"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:id="@+id/companyCode"
+        android:hint="Please enter company code"
+        android:layout_marginTop="5dp"
+        android:textColorHint="#b3b3b3"
+        android:paddingLeft="2dp"
+        android:background="@drawable/edittext_border"
+        android:layout_weight="0.10"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/button_bg"
+        android:layout_marginTop="10dp"
+        android:text="Submit"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        android:id="@+id/submitComCode"
+        android:layout_weight="0.10"/>
+    <ImageView
+        android:layout_width="140dp"
+        android:layout_height="65dp"
+        android:id="@+id/riddhiImage"
+        android:src="@drawable/riddhi_logo_small_2"
+        android:layout_gravity="center|bottom"
+        android:layout_weight="0.50"
+        android:layout_marginTop="20dp" />
+</LinearLayout>
