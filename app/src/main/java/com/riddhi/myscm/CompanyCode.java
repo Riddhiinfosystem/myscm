@@ -5,17 +5,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+
+
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import support.SharedValues;
 
@@ -35,8 +37,8 @@ public class CompanyCode extends AppCompatActivity {
         setContentView(R.layout.activity_company_code);
 
         context = this;
-        companyCode = (EditText) findViewById(R.id.companyCode);
-        submit = (Button) findViewById(R.id.submitComCode);
+        companyCode = findViewById(R.id.companyCode);
+        submit = findViewById(R.id.submitComCode);
 
         final String comCode = new SharedValues(context).loadSharedPreferences_CompanyCode();
 
@@ -49,19 +51,16 @@ public class CompanyCode extends AppCompatActivity {
             finish();
         }
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!TextUtils.isEmpty(companyCode.getText().toString()))
-                {
-                    new SharedValues(context).saveSharedPreference("companyCode",companyCode.getText().toString());
-                    startActivity(new Intent(context,MainActivity.class));
-                    finish();
-                }
-                else
-                {
-                    companyCode.setError("Company code should not be empty");
-                }
+        submit.setOnClickListener(view -> {
+            if (!TextUtils.isEmpty(companyCode.getText().toString()))
+            {
+                new SharedValues(context).saveSharedPreference("companyCode",companyCode.getText().toString());
+                startActivity(new Intent(context,MainActivity.class));
+                finish();
+            }
+            else
+            {
+                companyCode.setError("Company code should not be empty");
             }
         });
     }
@@ -78,7 +77,7 @@ public class CompanyCode extends AppCompatActivity {
 
             case REQUEST_READ_PHONE_STATE:
                 if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    //TODO
+
                 }
                 break;
 

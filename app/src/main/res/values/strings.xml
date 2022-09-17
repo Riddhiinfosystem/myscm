@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MySCM</string>
+    <string name="please_enter_company_code">Please Enter Company Code</string>
+    <string name="submit">Submit</string>
 </resources>
