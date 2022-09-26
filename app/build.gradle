@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "30.0.3"
     defaultConfig {
         applicationId "com.riddhi.myscm"
         minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 7
-        versionName "1.7.0"
+        targetSdkVersion 30
+        versionCode 8
+        versionName "1.8.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
