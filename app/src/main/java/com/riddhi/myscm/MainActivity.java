@@ -218,9 +218,12 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                             if (isResized) {
-                                File dfile = convertToPdf(destImg);
-
+                                File dfile = new File(destImg);
                                 resultArray[i] = Uri.fromFile(dfile);
+
+                                /*File dfile = convertToPdf(destImg);
+
+                                resultArray[i] = Uri.fromFile(dfile);*/
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -278,8 +281,6 @@ public class MainActivity extends AppCompatActivity {
                         String sourceImg = result.getEncodedPath();
                         String destImg = sourceImg.replace(".jpg", "_lower.jpg");
 
-                        //isResized = new ImageResizer(this).resizeImage(sourceImg, destImg);
-
                         if (data != null) {
                             destImg = new ImageResizer(this).getRealPathFromURI_API11to18(MainActivity.this, defaultUri);
                             destImg = destImg.replace(".jpg", "_lower.jpg");
@@ -289,10 +290,10 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         if (isResized) {
-                    /* File dfile = new File(destImg);
-                            result = Uri.fromFile(dfile);*/
-                            File dfile = convertToPdf(destImg);
+                             File dfile = new File(destImg);
                             result = Uri.fromFile(dfile);
+                            /*File dfile = convertToPdf(destImg);
+                            result = Uri.fromFile(dfile);*/
 
 
                         }
@@ -345,7 +346,6 @@ public class MainActivity extends AppCompatActivity {
                 FileOutputStream fileOutputStream = new FileOutputStream(file);
                 pdfDocument.writeTo(fileOutputStream);
                 String sts = file.getAbsolutePath();
-                //   Log.d("TAG", "convertToPdf: " + sts);
                 Uri result;
                 result = Uri.parse(sts);
                 srcImg = result.getEncodedPath();

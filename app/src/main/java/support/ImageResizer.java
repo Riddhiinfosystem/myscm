@@ -64,19 +64,37 @@ public class ImageResizer {
 
         Bitmap bmp=null;
 
+        double ratio = 5;
+
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
+
+        if ((options.outWidth > 3400)) {
+            ratio = 5;
+        } else if ((options.outWidth > 2400)) {
+            ratio = 4;
+        } else if ((options.outWidth > 1600)) {
+            ratio = 3;
+        } else if ((options.outWidth > 1200)) {
+            ratio = 2;
+        } else if ((options.outWidth > 800)) {
+            ratio = 1;
+        }
+
+
         try {
             BitmapFactory.decodeStream(context.getContentResolver().openInputStream(uri), null, options);
-            options.inSampleSize = calculateInSampleSize(options, 100, 100);
+            //options.inSampleSize = calculateInSampleSize(options, 100, 100);
+            options.inSampleSize = getPowerOfTwoForSampleRatio(ratio);
             options.inJustDecodeBounds = false;
             bmp = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(uri), null, options);
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         if (bmp != null)
         {
-            if (bmp.getWidth() > minWidth && bmp.getWidth() > bmp.getHeight())
+            /*if (bmp.getWidth() > minWidth && bmp.getWidth() > bmp.getHeight())
             {
                 width = minWidth;
                 height = Math.round(((float) bmp.getHeight() / (float) bmp.getWidth()) * minWidth);
@@ -87,15 +105,16 @@ public class ImageResizer {
                 width = Math.round(((float) bmp.getWidth() / (float) bmp.getHeight()) * minHeight);
             }
 
-            Bitmap bScaled = Bitmap.createScaledBitmap(bmp,width, height,true);
+            Bitmap bScaled = Bitmap.createScaledBitmap(bmp,width, height,true);*/
 
             try {
                 if (CheckPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE))
                 {
                     if (CheckPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                         FileOutputStream fout = new FileOutputStream(destImagePath, true);
-                        bScaled.compress(Bitmap.CompressFormat.JPEG, 80, fout);
-                        bmp.recycle();
+                        bmp.compress(Bitmap.CompressFormat.JPEG, 100, fout);
+                        //bScaled.compress(Bitmap.CompressFormat.JPEG, 100, fout);
+                        //bmp.recycle();
                         fout.flush();
                         fout.close();
                         isResized = true;
@@ -117,6 +136,14 @@ public class ImageResizer {
         return isResized;
 
 
+    }
+
+    private static int getPowerOfTwoForSampleRatio(double ratio) {
+        int k = Integer.highestOneBit((int) Math.floor(ratio));
+        if (k == 0)
+            return 1;
+        else
+            return k;
     }
 
     public static int calculateInSampleSize(
@@ -143,9 +170,31 @@ public class ImageResizer {
 
     public boolean resizeImage(String sourceImagePath, String destImagePath) throws IOException {
 
+        double ratio = 5;
         Bitmap bmp = null;
         try {
-            bmp = BitmapFactory.decodeFile(sourceImagePath);
+
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+
+            if ((options.outWidth > 3400)) {
+                ratio = 5;
+            } else if ((options.outWidth > 2400)) {
+                ratio = 4;
+            } else if ((options.outWidth > 1600)) {
+                ratio = 3;
+            } else if ((options.outWidth > 1200)) {
+                ratio = 2;
+            } else if ((options.outWidth > 800)) {
+                ratio = 1;
+            }
+
+            options.inSampleSize = getPowerOfTwoForSampleRatio(ratio);
+            options.inJustDecodeBounds = false;
+
+            bmp = BitmapFactory.decodeFile(sourceImagePath,options);
+
+
         }
         catch (Exception e)
         {
@@ -157,7 +206,8 @@ public class ImageResizer {
 
         if (bmp != null)
         {
-            if (bmp.getWidth() > minWidth && bmp.getWidth() > bmp.getHeight())
+
+            /*if (bmp.getWidth() > minWidth && bmp.getWidth() > bmp.getHeight())
             {
                 width = minWidth;
                 height = Math.round(((float) bmp.getHeight() / (float) bmp.getWidth()) * minWidth);
@@ -168,15 +218,16 @@ public class ImageResizer {
                 width = Math.round(((float) bmp.getWidth() / (float) bmp.getHeight()) * minHeight);
             }
 
-            Bitmap bScaled = Bitmap.createScaledBitmap(bmp,width, height,true);
+            Bitmap bScaled = Bitmap.createScaledBitmap(bmp,width, height,true);*/
 
             try {
                 if (CheckPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE))
                 {
                     if (CheckPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                         FileOutputStream fout = new FileOutputStream(destImagePath, true);
-                        bScaled.compress(Bitmap.CompressFormat.JPEG, 80, fout);
-                        bmp.recycle();
+                        bmp.compress(Bitmap.CompressFormat.JPEG, 100, fout);
+                        //bScaled.compress(Bitmap.CompressFormat.JPEG, 100, fout);
+                        //bmp.recycle();
                         fout.flush();
                         fout.close();
                         isResized = true;

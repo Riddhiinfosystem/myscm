@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MySCM.iml" filepath="$PROJECT_DIR$/MySCM.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MySCM.iml" filepath="$PROJECT_DIR$/.idea/modules/MySCM.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MySCM.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MySCM.app.iml" />
     </modules>
   </component>
